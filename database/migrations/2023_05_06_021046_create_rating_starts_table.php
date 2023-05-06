@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('post_products', function (Blueprint $table) {
+        Schema::create('rating_starts', function (Blueprint $table) {
             $table->id();
-            $table->string('image');
-            $table->string('title');
-            $table->string('description');
+            $table->integer('post_id');
             $table->integer('user_id');
             $table->timestamps();
         });
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('post_products');
+        Schema::dropIfExists('rating_starts');
     }
 };

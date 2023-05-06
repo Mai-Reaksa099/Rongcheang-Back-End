@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth;
+use App\Http\Controllers\Product;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,13 +18,15 @@ use App\Http\Controllers\Auth;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
 Route::get('/me', function (){
     return "H";
 });
 Route::get('/my-dm', [Auth\AuthController::class, 'domain']);
 
+Route::post('/register', [Auth\AuthController::class, 'register']);
+Route::post('/login', [Auth\AuthController::class, 'login']);
 # Protection Routing
 Route::group(['middleware' => ['auth:sanctum']], function (){
-    Route::post('/register', [Auth\AuthController::class, 'register']);
-    Route::post('/login', [Auth\AuthController::class, 'login']);
+    Route::post('/posting', [Product\Post::class, 'postContent']);
 });
