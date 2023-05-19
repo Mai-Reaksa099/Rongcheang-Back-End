@@ -7,5 +7,7 @@ use Illuminate\Http\Request;
 
 class RatingPoint extends Controller
 {
-    //
+    public function rating(Request $request){
+
+    }
 }

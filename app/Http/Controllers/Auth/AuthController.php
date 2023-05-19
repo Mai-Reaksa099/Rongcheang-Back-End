@@ -10,9 +10,9 @@ class AuthController extends Controller
 {
     public function register(Request $request){
         $request->validate([
-            'name'=>'required|string',
-            'email'=>'required|string',
-            'password'=>'required|string'
+            'name'=>'required|string|min:2|max:100',
+            'email'=>'required|string|unique:users|email',
+            'password'=>'required|string|min:8|max:10'
         ]);
         $user_exist = User::where('email', $request->email)->first();
         if($user_exist){

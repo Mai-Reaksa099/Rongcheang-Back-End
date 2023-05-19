@@ -22,11 +22,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/me', function (){
     return "H";
 });
+
 Route::get('/my-dm', [Auth\AuthController::class, 'domain']);
 
 Route::post('/register', [Auth\AuthController::class, 'register']);
 Route::post('/login', [Auth\AuthController::class, 'login']);
+
 # Protection Routing
 Route::group(['middleware' => ['auth:sanctum']], function (){
     Route::post('/posting', [Product\Post::class, 'postContent']);
+    Route::post('/rating', [Product\Post::class, 'rating']);
+    Route::post('/comment', [Product\Comment::class, 'comment']);
 });
