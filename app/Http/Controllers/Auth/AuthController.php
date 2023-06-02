@@ -60,4 +60,5 @@ class AuthController extends Controller
             'success'=>false,
         ]);
     }
+
 }

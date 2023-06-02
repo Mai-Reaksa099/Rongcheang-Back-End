@@ -19,12 +19,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/me', function (){
-    return "H";
-});
-
-Route::get('/my-dm', [Auth\AuthController::class, 'domain']);
-
 Route::post('/register', [Auth\AuthController::class, 'register']);
 Route::post('/login', [Auth\AuthController::class, 'login']);
 
@@ -33,4 +27,10 @@ Route::group(['middleware' => ['auth:sanctum']], function (){
     Route::post('/posting', [Product\Post::class, 'postContent']);
     Route::post('/rating', [Product\Post::class, 'rating']);
     Route::post('/comment', [Product\Comment::class, 'comment']);
+    Route::get('/get-post/{id}', [Product\Post::class, 'getPost']);
+    Route::get('/userpost', [Product\Post::class, 'posting']);
+    Route::put('/uptate/{id}', [Product\Post::class, 'update']);
+
 });
+Route::get('/admin-log', [Auth\AdminAuthController::class, 'register']);
+//Route::get('/userpost', [Product\Post::class, 'posting']);
