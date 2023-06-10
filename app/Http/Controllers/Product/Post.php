@@ -25,6 +25,10 @@ class Post extends Controller
             'description'=>$request->description,
             'user_id'=>Auth::user()->id
         ]);
+
+        $uploadedFileUrl =
+            Cloudinary::upload($request->file('file')->getRealPath())->getSecurePath();
+
         return response($post);
     }
     public function rating(Request $request){
@@ -38,20 +42,20 @@ class Post extends Controller
         ]);
         return response("Like");
     }
-    public function deletePost(Request $request){
-
-    }
-    public function updatePost(Request $request){
-
+    public function deletePost($id){
+        return PostProduct::destroy($id);
     }
     public function getPost($id){
         $post = PostProduct::find($id);
         return response(new PostResources($post));
     }
+    public function getAll(){
+        return PostProduct::all();
+    }
     public function posting(){
         return PostProduct::all();
     }
-    public function update(Request $request, $id){
+    public function updateContent(Request $request, $id){
         $product = PostProduct::find($id);
         $product->update($request->all());
         return $product;

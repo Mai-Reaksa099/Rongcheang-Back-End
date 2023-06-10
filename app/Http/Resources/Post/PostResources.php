@@ -7,20 +7,20 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use App\Models\RatingStart;
 class PostResources extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @return array<string, mixed>
-     */
-    public function toArray(Request $request): array
-    {
-        return [
-            'id'=>$this->id,
-            'title'=>$this->title,
-            'description'=>$this->description,
-            'image'=>$this->image,
-            'user'=>$this->getPost,
-            'rating_count'=>$this->getRating->count()
-        ];
-    }
+//    /**
+//     * Transform the resource into an array.
+//     *
+//     * @return array<string, mixed>
+//     */
+//    public function toArray(Request $request): array
+//    {
+//        return [
+//            'id'=>$this->id,
+//            'title'=>$this->title,
+//            'description'=>$this->description,
+//            'image'=>$this->image,
+//            'user'=>$this->getPost,
+//            'rating_count'=>$this->getRating->count()
+//        ];
+//    }
 }

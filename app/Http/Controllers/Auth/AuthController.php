@@ -60,5 +60,10 @@ class AuthController extends Controller
             'success'=>false,
         ]);
     }
+    public function getUser(){
+//        $user = User::find();
+//        return response($user);
+        return User::all();
+     }
 
 }

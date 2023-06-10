@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth;
 use App\Http\Controllers\Product;
+use App\Http\Controllers\Fixer;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -29,8 +30,15 @@ Route::group(['middleware' => ['auth:sanctum']], function (){
     Route::post('/comment', [Product\Comment::class, 'comment']);
     Route::get('/get-post/{id}', [Product\Post::class, 'getPost']);
     Route::get('/userpost', [Product\Post::class, 'posting']);
-    Route::put('/uptate/{id}', [Product\Post::class, 'update']);
+    Route::put('/update/{id}', [Product\Post::class, 'updateContent']);
+    Route::get('/get_user', [Auth\AuthController::class, 'getUser']);
+    Route::get('/get_post', [Product\Post::class, 'getAll']);
+    Route::delete('/delete_post/{id}', [Product\Post::class, 'deletePost']);
+
+
 
 });
 Route::get('/admin-log', [Auth\AdminAuthController::class, 'register']);
-//Route::get('/userpost', [Product\Post::class, 'posting']);
+
+
+Route::post('/post-fixer', [Fixer\AuthController::class, 'register']);
