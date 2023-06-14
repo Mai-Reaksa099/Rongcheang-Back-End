@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Product;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Post\PostResources;
+use App\Models\Fixer\AuthFixer;
 use App\Models\PostProduct;
 use App\Models\RatingStart;
 use Illuminate\Http\Request;
@@ -23,13 +24,19 @@ class Post extends Controller
             'image'=>$request->image,
             'title'=>$request->title,
             'description'=>$request->description,
-            'user_id'=>Auth::user()->id
+            'user_id'=>Auth::user()->id,
+            'poster'=>Auth::user()
         ]);
+        $poster = AuthFixer::all();
+//        $uploadedFileUrl =
+//            Cloudinary::upload($request->file('file')->getRealPath())->getSecurePath();
 
-        $uploadedFileUrl =
-            Cloudinary::upload($request->file('file')->getRealPath())->getSecurePath();
-
-        return response($post);
+        return response([
+            'message'=>'Success',
+            'status'=>300,
+            '$post'=>$post,
+            'poster'=>$poster
+        ]);
     }
     public function rating(Request $request){
         $request->validate([
@@ -37,7 +44,7 @@ class Post extends Controller
         ]);
         RatingStart::create([
             'post_id'=>$request->post_id,
-            'user_id'=>Auth::user()->id
+            'user_id'=>Auth::auth_fixer()->id
 
         ]);
         return response("Like");

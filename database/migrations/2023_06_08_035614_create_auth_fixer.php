@@ -13,10 +13,15 @@ return new class extends Migration
     {
         Schema::create('auth_fixer', function (Blueprint $table) {
             $table->id();
-            $table->string('uname')->nullable()->default(null);
+            $table->string('name');
             $table->string('email');
             $table->string('password');
             $table->string('numberPhone');
+            $table->string('companyName');
+            $table->string('typeCompany');
+            $table->string('socialMedia');
+            $table->string('address');
+            $table->string('role')->default('fixer');
             $table->timestamps();
         });
     }

@@ -1,38 +1,32 @@
 <?php
 
-namespace App\Http\Controllers\Fixer;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\AuthAdmin;
 use Illuminate\Http\Request;
-use App\Models\Fixer\AuthFixer;
 use Illuminate\Support\Facades\Hash;
 
-class AuthController extends Controller
+class AdminAuthController extends Controller
 {
-    public function fixerRegister(Request $request){
+    public function adminRegister(Request $request){
         $request->validate([
             'name'=>'required|string|min:2|max:100',
             'email'=>'required|string|unique:users|email',
-            'password'=>'required|string|min:8|max:10',
-            'numberPhone'=>'required|string|min:9|max:9',
-            'companyName'=>'required',
-            'typeCompany'=>'required',
-            'socialMedia'=>'required',
-            'address'=>'required'
-
+            'password'=>'required|string|min:8|max:10'
         ]);
+        $user_exist = AuthAdmin::where('email', $request->email)->first();
+        if($user_exist){
+            return response([
+                'message'=>'Create Success!',
+                'success'=>false
+            ]);
+        }
 
-
-        $user = AuthFixer::create([
+        $user = AuthAdmin::create([
             'name'=>$request->name,
             'email'=>$request->email,
-            'password'=>Hash::make($request->password),
-            'numberPhone'=>$request->numberPhone,
-            'companyName'=>$request->companyName,
-            'typeCompany'=>$request->typeCompany,
-            'socialMedia'=>$request->socialMedia,
-            'address'=>$request->address
-
+            'password'=>Hash::make($request->password)
         ]);
         return response([
             'message'=>'Create Success',
@@ -40,12 +34,12 @@ class AuthController extends Controller
             '$user'=>$user
         ]);
     }
-    public function fixerLogin(Request $request){
+    public function adminLogin(Request $request){
         $request->validate([
             'email'=>'required|string',
             'password'=>'required|string'
         ]);
-        $user = AuthFixer::where('email', $request->email)->first();
+        $user = AuthAdmin::where('email', $request->email)->first();
         if(!$user){
             return response([
                 'message'=>'User Not Found!',
