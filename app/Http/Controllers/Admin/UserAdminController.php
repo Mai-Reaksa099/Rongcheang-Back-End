@@ -17,4 +17,16 @@ class UserAdminController extends Controller
             '$poster'=>$poster
         ]);
     }
+    public function update(Request $request, $id){
+        $costumer = AuthFixer::find($id);
+        $costumer->update($request->all());
+        return $costumer;
+    }
+    public function deleteUser($id){
+        $delete = AuthFixer::destroy($id);
+        return response([
+            'message'=>'Deleted User',
+            '$user'=>$delete
+        ]);
+    }
 }

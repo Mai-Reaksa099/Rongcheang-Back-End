@@ -67,4 +67,8 @@ class AuthController extends Controller
             'success'=>false,
         ]);
     }
+
+    public function getFixerData(){
+        return AuthFixer::all();
+    }
 }

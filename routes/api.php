@@ -28,6 +28,9 @@ Route::post('/admin-log', [Admin\AdminAuthController::class, 'adminLogin']);
 Route::post('/register-fixer', [Fixer\AuthController::class, 'fixerRegister']);
 Route::post('/login-fixer', [Fixer\AuthController::class, 'fixerLogin']);
 
+# Filter Data
+Route::get('/get-user', [Admin\UserAdminController::class, 'getAllUser']);
+
 # Protection Routing
 Route::group(['middleware' => ['auth:sanctum']], function (){
     Route::post('/posting', [Product\Post::class, 'postContent']);
@@ -36,10 +39,14 @@ Route::group(['middleware' => ['auth:sanctum']], function (){
     Route::get('/get-post/{id}', [Product\Post::class, 'getPost']);
     Route::get('/user-post', [Product\Post::class, 'posting']);
     Route::put('/update/{id}', [Product\Post::class, 'updateContent']);
+    Route::put('/update-user/{id}', [Admin\UserAdminController::class, 'update']);
     Route::get('/get_user', [Auth\AuthController::class, 'getUser']);
     Route::get('/get_post', [Product\Post::class, 'getAll']);
     Route::delete('/delete_post/{id}', [Product\Post::class, 'deletePost']);
+    Route::get('/get-fixer', [Fixer\AuthController::class, 'getFixerData']);
+    Route::put('/update-fixer/{id}', [Admin\UserAdminController::class, 'update']);
+    Route::delete('/delete-user/{id}', [Admin\UserAdminController::class, 'deleteUser']);
 
 });
- # Admin Panel
-Route::get('/get-user', [Admin\UserAdminController::class, 'getAllUser']);
+
+
