@@ -10,7 +10,7 @@ use App\Models\RatingStart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class Post extends Controller
+class zPost extends Controller
 {
     public function postContent(Request $request){
          $request->validate([
