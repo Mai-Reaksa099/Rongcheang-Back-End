@@ -48,5 +48,9 @@ Route::group(['middleware' => ['auth:sanctum']], function (){
     Route::delete('/delete-user/{id}', [Admin\UserAdminController::class, 'deleteUser']);
 
 });
+Route::group(['middleware' => ['web']], function () {
+    Route::get('auth/google', [\App\Http\Controllers\GoogleAuthController::class, 'redireact'])->name('google-auth');
+    Route::get('auth/google/callback', [\App\Http\Controllers\GoogleAuthController::class, 'callBack']);
+});
 
 
