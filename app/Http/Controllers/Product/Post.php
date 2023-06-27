@@ -9,6 +9,7 @@ use App\Models\PostProduct;
 use App\Models\RatingStart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class Post extends Controller
 {
@@ -57,7 +58,14 @@ class Post extends Controller
         return response(new PostResources($post));
     }
     public function getAll(){
-        return PostProduct::all();
+        $product = PostProduct::all();
+        $infoUser = DB::select('SELECT name, numberPhone, companyName, socialMedia, address FROM auth_fixer');
+        return response([
+            'info'=>$infoUser,
+            'product'=>$product,
+            'state'=>2003
+
+        ]);
     }
     public function posting(){
         return PostProduct::all();
