@@ -10,10 +10,11 @@ use App\Models\RatingStart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 class Post extends Controller
 {
     public function postContent(Request $request){
+        $resopen = cloudinary();
          $request->validate([
             'image' =>'required',
             'title'=>'required',
@@ -59,13 +60,14 @@ class Post extends Controller
     }
     public function getAll(){
         $product = PostProduct::all();
-        $infoUser = DB::select('SELECT name, numberPhone, companyName, socialMedia, address FROM auth_fixer');
         return response([
-            'info'=>$infoUser,
             'product'=>$product,
             'state'=>2003
-
         ]);
+    }
+    public function userInfo(){
+        $infoUser = DB::select('SELECT name, numberPhone, companyName, socialMedia, address FROM auth_fixer');
+        return response($infoUser);
     }
     public function posting(){
         return PostProduct::all();
@@ -75,4 +77,5 @@ class Post extends Controller
         $product->update($request->all());
         return $product;
     }
+
 }
