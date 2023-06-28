@@ -77,5 +77,22 @@ class Post extends Controller
         $product->update($request->all());
         return $product;
     }
+    public function search_product(Request $request){
+        if($request->has('search')) {
+            $posts = PostProduct::search($request->searchText)->get();
+        } else {
+            $posts = PostProduct::get();
+        }
+        return response($posts);
+    }
+
+    /**
+     * @param str $name
+     * @return  \Illuminate\Http\Response
+     */
+    public function search($name){
+        return PostProduct::where('name', 'like', '%'.$name.'%')->get();
+
+    }
 
 }

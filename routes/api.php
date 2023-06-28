@@ -40,6 +40,7 @@ Route::group(['middleware' => ['auth:sanctum']], function (){
     Route::get('/get-post/{id}', [Product\Post::class, 'getPost']);
     Route::get('/user-post', [Product\Post::class, 'posting']);
     Route::put('/update/{id}', [Product\Post::class, 'updateContent']);
+    Route::get('/search-product/{name}', [Product\Post::class, 'search']);
     Route::put('/update-user/{id}', [Admin\UserAdminController::class, 'update']);
     Route::get('/get_user', [Auth\AuthController::class, 'getUser']);
     Route::get('/get_post', [Product\Post::class, 'getAll']);

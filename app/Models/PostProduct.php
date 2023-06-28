@@ -7,9 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\RatingStart;
 use App\Http\Resources\Post\PostResources;
+use Laravel\Scout\Searchable;
 class PostProduct extends Model
 {
-    use HasFactory;
+    use HasFactory, Searchable;
     protected $table = 'post_products';
     protected $guarded = ['id'];
 //    public function getPost(){
@@ -18,4 +19,17 @@ class PostProduct extends Model
 //    public function getRating(){
 //        return $this->hasMany(RatingStart::class, 'post_id');
 //    }
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array<string, mixed>
+     */
+    public function toSearchableArray(): array
+    {
+        $array = $this->toArray();
+
+        // Customize the data array...
+
+        return $array;
+    }
 }
