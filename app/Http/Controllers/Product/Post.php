@@ -10,18 +10,19 @@ use App\Models\RatingStart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Models\ImageStorage;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 class Post extends Controller
 {
     public function postContent(Request $request){
-        //$resopen = cloudinary();
+        $resopent = cloudinary();
          $request->validate([
             'image' =>'required',
             'title'=>'required',
             'description'=>'required',
 
         ]);
-
+        $poster = DB::select('SELECT id FROM post_products');
         $post = PostProduct::create([
             'image'=>$request->image,
             'title'=>$request->title,
@@ -29,16 +30,29 @@ class Post extends Controller
             'user_id'=>Auth::user()->id,
             'poster'=>Auth::user()
         ]);
-        $poster = AuthFixer::all();
-//        $uploadedFileUrl =
-//            Cloudinary::upload($request->file('file')->getRealPath())->getSecurePath();
+
+//        $response = cloudinary()->upload($request->file('image')
+//            ->getRealPath(), [
+//            'folder' => 'ITE'
+//        ]);
+//
+//        ImageStorage::create([
+//            'post_id' => $post_id,
+//            'image_url' => $response->getSecurePath(),
+//            'image_public_id' => $response->getPublicId()
+//        ]);
+
+
 
         return response([
             'message'=>'Success',
-            'status'=>300,
-            '$post'=>$post,
+            'post'=>$post,
             'poster'=>$poster
         ]);
+
+    }
+    public function create_image(){
+
     }
     public function rating(Request $request){
         $request->validate([
