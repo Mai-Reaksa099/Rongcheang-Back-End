@@ -30,7 +30,7 @@ Route::post('/login-fixer', [Fixer\AuthController::class, 'fixerLogin']);
 
 # Filter Data
 Route::get('/get-user', [Admin\UserAdminController::class, 'getAllUser']);
-//Route::apiResource('/post_product', [Product\Post::class]);
+
 # Protection Routing
 Route::group(['middleware' => ['auth:sanctum']], function (){
     Route::post('/category-name',[Product\PostCategoryController::class, 'category']);
@@ -57,8 +57,8 @@ Route::group(['middleware' => ['auth:sanctum']], function (){
 
 });
 Route::group(['middleware' => ['web']], function () {
-    Route::get('auth/google', [\App\Http\Controllers\GoogleAuthController::class, 'redireact'])->name('google-auth');
-    Route::get('auth/google/callback', [\App\Http\Controllers\GoogleAuthController::class, 'callBack']);
+    Route::get('auth/google', [GoogleAuthController::class, 'redireact'])->name('google-auth');
+    Route::get('auth/google/callback', [GoogleAuthController::class, 'callBack']);
 });
 
 
