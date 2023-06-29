@@ -43,7 +43,7 @@ class HomeController extends Controller
         if($get_token){
             $get_token->is_activated = 1;
             $get_token->save();
-            $user = User::wher('email', $get_token->email)->first();
+            $user = User::where('email', $get_token->email)->first();
             $user->is_activated = 1;
             $user->save();
             $getting_token = Verifytoken::where('token', $get_token->token)->first();
