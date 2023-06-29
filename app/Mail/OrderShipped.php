@@ -12,6 +12,9 @@ use Illuminate\Queue\SerializesModels;
 class OrderShipped extends Mailable
 {
     use Queueable, SerializesModels;
+    public $get_user_email;
+    public $validToken;
+    public $get_user_name;
 
     /**
      * Create a new message instance.
@@ -19,6 +22,11 @@ class OrderShipped extends Mailable
     public function __construct()
     {
         //
+    public function __construct($get_user_email, $validToken, $get_user_name)
+    {
+        $this->get_user_email = $get_user_email;
+        $this->validToken = $validToken;
+        $this->get_user_name = $get_user_name;
     }
 
     /**
@@ -37,7 +45,11 @@ class OrderShipped extends Mailable
     public function content(): Content
     {
         return new Content(
+
             view: 'view.name',
+
+            view: 'emails.welcome',
+
         );
     }
 

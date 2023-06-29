@@ -65,6 +65,7 @@
                             </div>
                         </div>
                     </form>
+
                     <div class="text-center my-4">
                        hr
                         <div class="w-3/4 mx-auto my-4">
@@ -74,6 +75,7 @@
                         </div>
 
                     </div>
+
                 </div>
             </div>
         </div>
