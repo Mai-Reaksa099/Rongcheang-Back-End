@@ -14,7 +14,7 @@ use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 class Post extends Controller
 {
     public function postContent(Request $request){
-        $resopen = cloudinary();
+        //$resopen = cloudinary();
          $request->validate([
             'image' =>'required',
             'title'=>'required',
@@ -87,12 +87,11 @@ class Post extends Controller
     }
 
     /**
-     * @param str $name
+     * @param str $
      * @return  \Illuminate\Http\Response
      */
     public function search($name){
         return PostProduct::where('name', 'like', '%'.$name.'%')->get();
-
     }
 
 }

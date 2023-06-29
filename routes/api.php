@@ -33,14 +33,14 @@ Route::get('/get-user', [Admin\UserAdminController::class, 'getAllUser']);
 //Route::apiResource('/post_product', [Product\Post::class]);
 # Protection Routing
 Route::group(['middleware' => ['auth:sanctum']], function (){
-
+    Route::post('/category-name',[Product\PostCategoryController::class, 'category']);
     Route::post('/posting', [Product\Post::class, 'postContent']);
     Route::post('/rating', [Product\Post::class, 'rating']);
     Route::post('/comment', [Product\Comment::class, 'comment']);
     Route::get('/get-post/{id}', [Product\Post::class, 'getPost']);
     Route::get('/user-post', [Product\Post::class, 'posting']);
     Route::put('/update/{id}', [Product\Post::class, 'updateContent']);
-    Route::get('/search-product/{name}', [Product\Post::class, 'search']);
+    Route::get('/search-product/{name}', [Product\Post::class, 'search_product']);
     Route::put('/update-user/{id}', [Admin\UserAdminController::class, 'update']);
     Route::get('/get_user', [Auth\AuthController::class, 'getUser']);
     Route::get('/get_post', [Product\Post::class, 'getAll']);
