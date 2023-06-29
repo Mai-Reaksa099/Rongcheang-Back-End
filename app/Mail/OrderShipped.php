@@ -19,6 +19,9 @@ class OrderShipped extends Mailable
     /**
      * Create a new message instance.
      */
+    public function __construct()
+    {
+        //
     public function __construct($get_user_email, $validToken, $get_user_name)
     {
         $this->get_user_email = $get_user_email;
@@ -42,7 +45,11 @@ class OrderShipped extends Mailable
     public function content(): Content
     {
         return new Content(
+
+            view: 'view.name',
+
             view: 'emails.welcome',
+
         );
     }
 

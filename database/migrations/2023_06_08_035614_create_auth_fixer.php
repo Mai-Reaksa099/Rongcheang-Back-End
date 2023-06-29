@@ -11,15 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('auth_fixer', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('email')->unique();
-            $table->boolean('is_activated')->default(0);
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password')->nullable();
-            $table->string('google_id')->nullable();
-            $table->rememberToken();
+            $table->string('email');
+            $table->string('password');
+            $table->string('numberPhone');
+            $table->string('companyName');
+            $table->string('typeCompany');
+            $table->string('socialMedia');
+            $table->string('address');
+            $table->string('role')->default('fixer');
             $table->timestamps();
         });
     }
@@ -29,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('auth_fixer');
     }
 };

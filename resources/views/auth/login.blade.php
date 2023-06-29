@@ -65,6 +65,17 @@
                             </div>
                         </div>
                     </form>
+
+                    <div class="text-center my-4">
+                       hr
+                        <div class="w-3/4 mx-auto my-4">
+                            <a class="focus-ring-2 focus-ring-indigo-800 bg-body-secondary" href="{{route('google-auth')}}">
+                                <span>Login Google</span>
+                            </a>
+                        </div>
+
+                    </div>
+
                 </div>
             </div>
         </div>

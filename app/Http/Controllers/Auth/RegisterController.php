@@ -73,6 +73,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+          
         $validToken = rand(10, 100.. '2022');
         $get_token = new Verifytoken();
         $get_token->token = $validToken;
