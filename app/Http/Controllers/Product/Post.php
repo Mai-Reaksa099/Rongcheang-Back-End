@@ -15,7 +15,6 @@ use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 class Post extends Controller
 {
     public function postContent(Request $request){
-        $resopent = cloudinary();
          $request->validate([
             'image' =>'required',
             'title'=>'required',
@@ -31,16 +30,15 @@ class Post extends Controller
             'poster'=>Auth::user()
         ]);
 
-//        $response = cloudinary()->upload($request->file('image')
-//            ->getRealPath(), [
-//            'folder' => 'ITE'
-//        ]);
-//
-//        ImageStorage::create([
-//            'post_id' => $post_id,
-//            'image_url' => $response->getSecurePath(),
-//            'image_public_id' => $response->getPublicId()
-//        ]);
+        $response = cloudinary()->upload($request->file('image')
+            ->getRealPath(), [
+            'folder' => 'ITE'
+        ]);
+
+        ImageStorage::create([
+            'image_url' => $response->getSecurePath(),
+            'image_public_id' => $response->getPublicId()
+        ]);
 
 
 
