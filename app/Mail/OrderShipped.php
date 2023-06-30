@@ -44,7 +44,7 @@ class OrderShipped extends Mailable
     {
         return new Content(
 
-            //view: 'view.name',
+            view: 'view.name',
 
             view: 'emails.welcome',
 
