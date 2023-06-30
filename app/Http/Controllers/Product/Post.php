@@ -27,7 +27,9 @@ class Post extends Controller
             'title'=>$request->title,
             'description'=>$request->description,
             'image'=>$request->image,
-            'category_name_post'=>$request->$image_categoryID,
+            //'category_name_post'=>$request->$image_categoryID,
+            //'category_name_post'=>AuthFixer::query('SELECT category_name FROM post_category'),
+            'category_name_post'=>AuthFixer::query(),
             'user_id'=>Auth::user()->id,
             'poster'=>Auth::user()
         ]);

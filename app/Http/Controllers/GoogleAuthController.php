@@ -30,9 +30,8 @@ class GoogleAuthController extends Controller
             }
 
         }
-        catch (\Throwable $se){
-            report($se);
-            return false;
+        catch (Throwable $se){
+          dd('Something wrong!'. $se->getMessage());
         }
     }
 }

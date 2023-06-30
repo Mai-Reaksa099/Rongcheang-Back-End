@@ -17,6 +17,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/home', function (){
+    return view('home');
+})->middleware(['auth'])->name('home');
 Auth::routes();
 
 Route::get('/auth/google', [\App\Http\Controllers\GoogleAuthController::class, 'redireact'])->name('google-auth');
@@ -26,4 +29,4 @@ Route::get('/auth/google/callback', [\App\Http\Controllers\GoogleAuthController:
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/verify-account', [App\Http\Controllers\HomeController::class, 'verifyaccout'])->name('verifyAccount');
-Route::post('/verifyotp', [App\Http\Controllers\HomeController::class, 'userverification'])->name('verifyotp');
+//Route::post('/verifyotp', [App\Http\Controllers\HomeController::class, 'userverification'])->name('verifyotp');
