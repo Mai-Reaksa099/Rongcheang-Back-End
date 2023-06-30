@@ -9,4 +9,5 @@ class ImageStorage extends Model
 {
     use HasFactory;
     protected $table = 'image';
+    protected $fillable = ['id'];
 }
