@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\User;
 use App\Models\Verifytoken;
-
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -25,8 +25,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
-
         //return view('home');
         $get_user = User::where('email', auth()->user()->email)->first();
         if ($get_user->is_activated == 1){

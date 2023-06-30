@@ -19,12 +19,11 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 Route::get('/auth/google', [\App\Http\Controllers\GoogleAuthController::class, 'redireact'])->name('google-auth');
 Route::get('/auth/google/callback', [\App\Http\Controllers\GoogleAuthController::class, 'callBack']);
 
 
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 Route::get('/verify-account', [App\Http\Controllers\HomeController::class, 'verifyaccout'])->name('verifyAccount');
 Route::post('/verifyotp', [App\Http\Controllers\HomeController::class, 'userverification'])->name('verifyotp');
-

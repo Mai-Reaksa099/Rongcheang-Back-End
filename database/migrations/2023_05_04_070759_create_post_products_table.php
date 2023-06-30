@@ -16,7 +16,9 @@ return new class extends Migration
             $table->string('image');
             $table->string('title');
             $table->string('description');
+            $table->string('category_name_post');
             $table->integer('user_id');
+            $table->string('role')->default('poster');
             $table->timestamps();
         });
     }

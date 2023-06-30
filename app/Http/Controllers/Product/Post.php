@@ -15,18 +15,19 @@ use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 class Post extends Controller
 {
     public function postContent(Request $request){
-        $resopent = cloudinary();
          $request->validate([
             'image' =>'required',
             'title'=>'required',
             'description'=>'required',
-
+             'category_name_post'=>'required'
         ]);
         $poster = DB::select('SELECT id FROM post_products');
+        $image_categoryID = DB::select('SELECT category_name FROM post_category');
         $post = PostProduct::create([
-            'image'=>$request->image,
             'title'=>$request->title,
             'description'=>$request->description,
+            'image'=>$request->image,
+            'category_name_post'=>$request->$image_categoryID,
             'user_id'=>Auth::user()->id,
             'poster'=>Auth::user()
         ]);
@@ -41,7 +42,7 @@ class Post extends Controller
             'image_url' => $response->getSecurePath(),
             'image_public_id' => $response->getPublicId()
         ]);
-        
+
         return response([
             'message'=>'Success',
             'post'=>$post,
@@ -106,3 +107,4 @@ class Post extends Controller
     }
 
 }
+
