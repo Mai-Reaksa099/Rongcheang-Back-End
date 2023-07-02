@@ -9,10 +9,15 @@ use App\Models\PostProduct;
 use App\Models\RatingStart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
+
+class zPost extends Controller
+
 use Illuminate\Support\Facades\DB;
 use App\Models\ImageStorage;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 class Post extends Controller
+
 {
     public function postContent(Request $request){
          $request->validate([
