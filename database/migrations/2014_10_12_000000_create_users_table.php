@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('address');
             $table->string('google_id');
             $table->string('role')->default("GUEST");
+
             $table->rememberToken();
             $table->timestamps();
         });

@@ -30,6 +30,11 @@ class Post extends Controller
             'uuid' => $uuid,
             'description'=>$request->description,
             'user_id'=>Auth::user()->id,
+<<<<<<< HEAD
+=======
+
+            'poster'=>AuthFixer::where('')
+>>>>>>> e697e9c1f76c8153c5ca4f78ebd286823bc47293
         ]);
 
         $response = cloudinary()->upload($request->file('image')
