@@ -16,10 +16,10 @@ Route::get('/', function () {
    return view('welcome');
 });
 
-Route::get('/home', function (){
-    return view('home');
-})->middleware(['auth'])->name('home');
-Auth::routes();
+//Route::get('/home', function (){
+//    return view('home');
+//})->middleware(['auth'])->name('home');
+//Auth::routes();
 //
 //Route::get('/auth/google', [\App\Http\Controllers\GoogleAuthController::class, 'redireact'])->name('google-auth');
 //Route::get('/auth/google/callback', [\App\Http\Controllers\GoogleAuthController::class, 'callBack']);

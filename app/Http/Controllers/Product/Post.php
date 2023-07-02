@@ -21,8 +21,7 @@ class Post extends Controller
             'description'=>'required',
              //'category_name_post'=>'required'
         ]);
-        $poster = DB::select('SELECT id FROM post_products');
-        $image_categoryID = DB::select('SELECT category_name FROM post_category');
+
 
         $uuid = fake()->uuid();
         $post = PostProduct::create([
@@ -30,12 +29,7 @@ class Post extends Controller
             'uuid' => $uuid,
             'description'=>$request->description,
             'user_id'=>Auth::user()->id,
-<<<<<<< HEAD
-=======
 
-            'poster'=>AuthFixer::where('')
->>>>>>> e697e9c1f76c8153c5ca4f78ebd286823bc47293
-        ]);
 
         $response = cloudinary()->upload($request->file('image')
             ->getRealPath(), [
