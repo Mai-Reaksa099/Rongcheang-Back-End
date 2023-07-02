@@ -19,19 +19,17 @@ class Post extends Controller
             'image' =>'required',
             'title'=>'required',
             'description'=>'required',
-             'category_name_post'=>'required'
+             //'category_name_post'=>'required'
         ]);
         $poster = DB::select('SELECT id FROM post_products');
         $image_categoryID = DB::select('SELECT category_name FROM post_category');
+
+        $uuid = fake()->uuid();
         $post = PostProduct::create([
             'title'=>$request->title,
+            'uuid' => $uuid,
             'description'=>$request->description,
-            'image'=>$request->image,
-            //'category_name_post'=>$request->$image_categoryID,
-            //'category_name_post'=>AuthFixer::query('SELECT category_name FROM post_category'),
-            'category_name_post'=>AuthFixer::query(),
             'user_id'=>Auth::user()->id,
-            'poster'=>Auth::user()
         ]);
 
         $response = cloudinary()->upload($request->file('image')
@@ -40,7 +38,7 @@ class Post extends Controller
         ]);
 
         ImageStorage::create([
-            'post_id' => $poster,
+            'post_id' => PostProduct::where('uuid', $uuid)->firstOrFail()->id,
             'image_url' => $response->getSecurePath(),
             'image_public_id' => $response->getPublicId()
         ]);

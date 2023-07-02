@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('image', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('post_id')->nullable();
+            $table->foreignId('user_id')->nullable();
+            $table->string('image_url');
+            $table->string('image_public_id');
+
             $table->timestamps();
         });
     }

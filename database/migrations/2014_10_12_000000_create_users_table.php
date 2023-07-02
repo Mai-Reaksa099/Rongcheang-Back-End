@@ -17,8 +17,14 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->boolean('is_activated')->default(0);
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password')->nullable();
-            $table->string('google_id')->nullable();
+            $table->string('password');
+            $table->string('phoneNumber');
+            $table->string('companyName');
+            $table->string('typeCompany');
+            $table->string('socialMedia');
+            $table->string('address');
+            $table->string('google_id');
+            $table->string('role')->default("GUEST");
             $table->rememberToken();
             $table->timestamps();
         });

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Fixer;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Fixer\AuthFixer;
 use Illuminate\Support\Facades\Hash;
@@ -14,7 +15,7 @@ class AuthController extends Controller
             'name'=>'required|string|min:2|max:100',
             'email'=>'required|string|unique:users|email',
             'password'=>'required|string|min:8|max:10',
-            'numberPhone'=>'required|string|min:9|max:9',
+            'phoneNumber'=>'required|string|min:9|max:9',
             'companyName'=>'required',
             'typeCompany'=>'required',
             'socialMedia'=>'required',
@@ -23,15 +24,16 @@ class AuthController extends Controller
         ]);
 
 
-        $user = AuthFixer::create([
+        $user = User::create([
             'name'=>$request->name,
             'email'=>$request->email,
             'password'=>Hash::make($request->password),
-            'numberPhone'=>$request->numberPhone,
+            'phoneNumber'=>$request->phoneNumber,
             'companyName'=>$request->companyName,
             'typeCompany'=>$request->typeCompany,
             'socialMedia'=>$request->socialMedia,
-            'address'=>$request->address
+            'address'=>$request->address,
+            'role' =>$request->user('FIXER'),
 
         ]);
         return response([
@@ -45,7 +47,7 @@ class AuthController extends Controller
             'email'=>'required|string',
             'password'=>'required|string'
         ]);
-        $user = AuthFixer::where('email', $request->email)->first();
+        $user = User::where('email', $request->email)->first();
         if(!$user){
             return response([
                 'message'=>'User Not Found!',
@@ -68,7 +70,4 @@ class AuthController extends Controller
         ]);
     }
 
-//    public function getFixerData(){
-//        return AuthFixer::all();
-//    }
 }
