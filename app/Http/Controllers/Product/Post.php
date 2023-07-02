@@ -31,7 +31,8 @@ class Post extends Controller
             //'category_name_post'=>AuthFixer::query('SELECT category_name FROM post_category'),
             'category_name_post'=>AuthFixer::query(),
             'user_id'=>Auth::user()->id,
-            'poster'=>Auth::user()
+
+            'poster'=>AuthFixer::where('')
         ]);
 
         $response = cloudinary()->upload($request->file('image')
