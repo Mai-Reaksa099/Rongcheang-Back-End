@@ -4,9 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-
-    "content-hash": "39711593342321c9798881dde6c3b37f",
-
+    "content-hash": "062c8bad26c7839cdcb31689525aa51b",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
@@ -7797,7 +7795,6 @@
         },
         {
             "name": "nunomaduro/collision",
-
             "version": "v7.7.0",
             "source": {
                 "type": "git",
@@ -7820,7 +7817,6 @@
                 "phpunit/phpunit": "<10.1.2"
             },
             "require-dev": {
-
                 "brianium/paratest": "^7.2.2",
                 "laravel/framework": "^10.14.1",
                 "laravel/pint": "^1.10.3",
@@ -7891,7 +7887,6 @@
                     "type": "patreon"
                 }
             ],
-
             "time": "2023-06-29T09:10:16+00:00"
         },
         {

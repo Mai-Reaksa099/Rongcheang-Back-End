@@ -10,9 +10,6 @@ use App\Models\RatingStart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-
-class zPost extends Controller
-
 use Illuminate\Support\Facades\DB;
 use App\Models\ImageStorage;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
@@ -34,7 +31,7 @@ class Post extends Controller
             'uuid' => $uuid,
             'description'=>$request->description,
             'user_id'=>Auth::user()->id,
-
+        ]);
 
         $response = cloudinary()->upload($request->file('image')
             ->getRealPath(), [
