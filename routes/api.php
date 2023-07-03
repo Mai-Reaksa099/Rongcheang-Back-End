@@ -56,10 +56,10 @@ Route::group(['middleware' => ['auth:sanctum']], function (){
     Route::delete('admin/delete-guest/{id}', [Admin\ProductAdminController::class, 'delete_guest']);
 
 });
-Route::group(['middleware' => ['web']], function () {
-    Route::get('auth/google', [GoogleAuthController::class, 'redireact'])->name('google-auth');
-    Route::get('auth/google/callback', [GoogleAuthController::class, 'callBack']);
-});
-
+//Route::group(['middleware' => ['web']], function () {
+//    Route::get('auth/google', [GoogleAuthController::class, 'redireact'])->name('google-auth');
+//    Route::get('auth/google/callback', [GoogleAuthController::class, 'callBack']);
+//});
+//
 
 
