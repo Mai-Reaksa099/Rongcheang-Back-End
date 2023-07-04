@@ -33,7 +33,7 @@ class AuthController extends Controller
             'typeCompany'=>$request->typeCompany,
             'socialMedia'=>$request->socialMedia,
             'address'=>$request->address,
-            'role' =>$request->user('FIXER'),
+            //'role' =>$request->user('FIXER'),
 
         ]);
         return response([
