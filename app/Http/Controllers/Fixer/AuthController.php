@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Fixer;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Models\Fixer\AuthFixer;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -33,7 +32,7 @@ class AuthController extends Controller
             'typeCompany'=>$request->typeCompany,
             'socialMedia'=>$request->socialMedia,
             'address'=>$request->address,
-            'role' =>$request->user('FIXER'),
+           // 'role' =>$request->user('FIXER'),
 
         ]);
         return response([

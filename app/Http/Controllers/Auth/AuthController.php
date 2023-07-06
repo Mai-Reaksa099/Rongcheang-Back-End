@@ -26,7 +26,7 @@ class AuthController extends Controller
             'name'=>$request->name,
             'email'=>$request->email,
             'password'=>Hash::make($request->password),
-            'role'=>$request->user('FIXER')
+            //'role'=>$request->user('FIXER')
         ]);
         return response([
             'message'=>'Create Success',
