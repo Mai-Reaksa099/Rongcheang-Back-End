@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Fixer;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Sanctum\PersonalAccessToken;
 use Illuminate\Http\Request;
-use App\Models\Fixer\AuthFixer;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -21,7 +21,6 @@ class AuthController extends Controller
             'typeCompany'=>'required',
             'socialMedia'=>'required',
             'address'=>'required'
-
         ]);
 
         $user = User::create([
@@ -33,12 +32,10 @@ class AuthController extends Controller
             'typeCompany'=>$request->typeCompany,
             'socialMedia'=>$request->socialMedia,
             'address'=>$request->address,
-            'role' =>$request->user('FIXER'),
 
         ]);
         return response([
             'message'=>'Create Success',
-            'success'=>true,
             '$user'=>$user
         ]);
     }

@@ -25,31 +25,37 @@ Route::post('/register', [Auth\AuthController::class, 'register']);
 Route::post('/login', [Auth\AuthController::class, 'login']);
 Route::post('/admin-register', [Admin\AdminAuthController::class, 'adminRegister']);
 Route::post('/admin-log', [Admin\AdminAuthController::class, 'adminLogin']);
+
 Route::post('/register-fixer', [Fixer\AuthController::class, 'fixerRegister']);
 Route::post('/login-fixer', [Fixer\AuthController::class, 'fixerLogin']);
 
-# Filter Data
-Route::get('/get-user', [Admin\UserAdminController::class, 'getAllUser']);
-
 # Protection Routing
 Route::group(['middleware' => ['auth:sanctum']], function (){
-    Route::post('/category-name',[Product\PostCategoryController::class, 'category']);
-    Route::post('/posting', [Product\Post::class, 'postContent']);
-    Route::post('/rating', [Product\Post::class, 'rating']);
-    Route::post('/comment', [Product\Comment::class, 'comment']);
-    Route::get('/get-post/{id}', [Product\Post::class, 'getPost']);
-    Route::get('/user-post', [Product\Post::class, 'posting']);
-    Route::put('/update/{id}', [Product\Post::class, 'updateContent']);
+
+    // About Fixer User role
+    Route::get('/profile_management', [Fixer\ProfileManagementController::class, 'profile_management']);
+
+    Route::post('fixer/posting', [Product\Post::class, 'postContent']);
+    Route::get('fixer/get-post/{id}', [Product\Post::class, 'getPost']);
+    Route::get('fixer/user-post', [Product\Post::class, 'posting']);
+    Route::put('fixer/update/{id}', [Product\Post::class, 'updateContent']);
+    Route::delete('/delete_post/{id}', [Product\Post::class, 'deletePost']);
+    Route::get('/get_post', [Product\Post::class, 'getAll']);
+    Route::get('/get_post/user', [Product\Post::class, 'userInfo']);
+
     Route::get('/search-product/{name}', [Product\Post::class, 'search_product']);
     Route::put('/update-user/{id}', [Admin\UserAdminController::class, 'update']);
     Route::get('/get_user', [Auth\AuthController::class, 'getUser']);
-    Route::get('/get_post', [Product\Post::class, 'getAll']);
-    Route::get('/get_post/user', [Product\Post::class, 'userInfo']);
-    Route::delete('/delete_post/{id}', [Product\Post::class, 'deletePost']);
+
     Route::get('/get-fixer', [Fixer\AuthController::class, 'getFixerData']);
-    Route::get('fixer/profile_management', [Fixer\ProfileManagementController::class, 'profile_management']);
+
     Route::put('/update-fixer/{id}', [Admin\UserAdminController::class, 'update']);
     Route::delete('/delete-user/{id}', [Admin\UserAdminController::class, 'deleteUser']);
+
+
+    // route use after
+    Route::post('/rating', [Product\Post::class, 'rating']);
+    Route::post('/comment', [Product\Comment::class, 'comment']);
     Route::get('admin/list-fixer', [Admin\ProductAdminController::class, 'list_user']);
     Route::get('admin/list-guest', [Admin\ProductAdminController::class, 'guest_user']);
     Route::delete('admin/delete-fixer/{id}', [Admin\ProductAdminController::class, 'delete_fixer']);

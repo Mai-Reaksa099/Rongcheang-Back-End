@@ -12,7 +12,7 @@ class PostProduct extends Model
 {
     use HasFactory, Searchable;
     protected $table = 'post_products';
-    protected $guarded = ['id'];
+    protected $fillable = [ 'title', 'description', 'uuid', 'user_id'];
 //    public function getPost(){
 //        return $this->belongsTo(\App\Models\User::class, 'user_id');
 //    }
@@ -31,5 +31,10 @@ class PostProduct extends Model
         // Customize the data array...
 
         return $array;
+    }
+    public function getFillable()
+
+    {
+        return $this->fillable;
     }
 }
