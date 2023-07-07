@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 class ProfileManagementController extends Controller
 {
     public function profile_management(){
-        $profile = DB::select('SELECT name, email, numberPhone, companyName, socialMedia, address FROM auth_fixer');
+        $profile = DB::table(' users')->select('name', 'email', 'numberPhone', 'companyName', 'socialMedia', 'address')->get();
         return response($profile);
     }
 }

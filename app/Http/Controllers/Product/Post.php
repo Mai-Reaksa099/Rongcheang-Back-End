@@ -46,9 +46,6 @@ class Post extends Controller
         ]);
 
     }
-    public function create_image(){
-
-    }
     public function rating(Request $request){
         $request->validate([
             'post_id'=>'required'
@@ -83,6 +80,7 @@ class Post extends Controller
     }
     public function updateContent(Request $request, $id){
         $product = PostProduct::find($id);
+
         $product->update($request->all());
         return $product;
     }

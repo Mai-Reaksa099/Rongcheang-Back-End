@@ -12,10 +12,13 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    protected $table = 'users';
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
+     *
      */
     protected $fillable = [
         'name',
@@ -29,6 +32,16 @@ class User extends Authenticatable
         'role'
     ];
 
+    /**
+     * Get the fillable attributes for the model.
+     *
+     * @return array
+     */
+    public function getFillable()
+
+    {
+        return $this->fillable;
+    }
     /**
      * The attributes that should be hidden for serialization.
      *
