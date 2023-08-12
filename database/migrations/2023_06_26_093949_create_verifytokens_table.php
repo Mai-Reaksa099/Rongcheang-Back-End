@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('post_products', function (Blueprint $table) {
+        Schema::create('verifytokens', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('description');
-            $table->uuid('uuid');
-            $table->integer('user_id');
+            $table->string('token');
+            $table->string('email')->nullable();
+            $table->boolean('is_activated')->default(0);
             $table->timestamps();
         });
     }
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('post_products');
+        Schema::dropIfExists('verifytokens');
     }
 };

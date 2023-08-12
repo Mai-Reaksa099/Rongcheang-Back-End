@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Facade;
-
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 return [
 
     /*
@@ -189,6 +189,7 @@ return [
         /*
          * Application Service Providers...
          */
+        CloudinaryLabs\CloudinaryLaravel\CloudinaryServiceProvider::class,
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
@@ -209,6 +210,7 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
+
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
 

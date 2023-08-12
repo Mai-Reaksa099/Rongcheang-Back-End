@@ -10,33 +10,48 @@ use App\Models\RatingStart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Support\Facades\DB;
+use App\Models\ImageStorage;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 class Post extends Controller
+
 {
     public function postContent(Request $request){
          $request->validate([
             'image' =>'required',
             'title'=>'required',
             'description'=>'required',
-
+             //'category_name_post'=>'required'
         ]);
 
+
+        $uuid = fake()->uuid();
         $post = PostProduct::create([
-            'image'=>$request->image,
             'title'=>$request->title,
+            'uuid' => $uuid,
             'description'=>$request->description,
             'user_id'=>Auth::user()->id,
-            'poster'=>Auth::user()
         ]);
-        $poster = AuthFixer::all();
-//        $uploadedFileUrl =
-//            Cloudinary::upload($request->file('file')->getRealPath())->getSecurePath();
+
+        $response = cloudinary()->upload($request->file('image')
+            ->getRealPath(), [
+            'folder' => 'ITE'
+        ]);
+
+        ImageStorage::create([
+            'post_id' => PostProduct::where('uuid', $uuid)->firstOrFail()->id,
+            'image_url' => $response->getSecurePath(),
+            'image_public_id' => $response->getPublicId()
+        ]);
 
         return response([
             'message'=>'Success',
-            'status'=>300,
-            '$post'=>$post,
-            'poster'=>$poster
+            'post'=>$post,
         ]);
+
+    }
+    public function create_image(){
+
     }
     public function rating(Request $request){
         $request->validate([
@@ -57,7 +72,15 @@ class Post extends Controller
         return response(new PostResources($post));
     }
     public function getAll(){
-        return PostProduct::all();
+        $product = PostProduct::all();
+        return response([
+            'product'=>$product,
+            'state'=>2003
+        ]);
+    }
+    public function userInfo(){
+        $infoUser = DB::select('SELECT name, numberPhone, companyName, socialMedia, address FROM auth_fixer');
+        return response($infoUser);
     }
     public function posting(){
         return PostProduct::all();
@@ -67,4 +90,22 @@ class Post extends Controller
         $product->update($request->all());
         return $product;
     }
+    public function search_product(Request $request){
+        if($request->has('search')) {
+            $posts = PostProduct::search($request->searchText)->get();
+        } else {
+            $posts = PostProduct::get();
+        }
+        return response($posts);
+    }
+
+    /**
+     * @param str $
+     * @return  \Illuminate\Http\Response
+     */
+    public function search($name){
+        return PostProduct::where('name', 'like', '%'.$name.'%')->get();
+    }
+
 }
+

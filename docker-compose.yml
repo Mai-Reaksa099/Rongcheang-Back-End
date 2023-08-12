@@ -1,0 +1,127 @@
+version: "3.7"
+services:
+    app:
+        build:
+            args:
+                user: grocery-user
+                uid: 1000
+            context: ./
+            dockerfile: Dockerfile
+        image: grocery
+        container_name: grocery-app
+        restart: unless-stopped
+        working_dir: /var/www/
+        volumes:
+            - ./:/var/www
+        networks:
+            - grocery
+
+    nginx:
+        image: nginx:alpine
+        container_name: grocery-nginx
+        restart: unless-stopped
+        ports:
+            - "8002:80"
+        volumes:
+            - ./:/var/www
+            - ./docker-compose/nginx:/etc/nginx/conf.d/
+        networks:
+            - grocery
+
+    db:
+        platform: linux/x86_64
+        image: mysql:5.7
+        container_name: grocery-db
+        restart: unless-stopped
+        ports:
+            - "3308:3306"
+        environment:
+            MYSQL_DATABASE: grocery-store-db
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_PASSWORD: admin@123
+            MYSQL_USER: grocery-mysql
+            SERVICE_TAGS: dev
+            SERVICE_NAME: mysql
+        volumes:
+            - dbdata:/var/lib/mysql/
+            - ./docker-compose/mysql:/docker-entrypoint-initdb.d
+        networks:
+            - grocery
+
+    phpmyadmin:
+        platform: linux/x86_64
+        image: phpmyadmin/phpmyadmin:latest
+        restart: always
+        container_name: grocery-phpmyadmin
+        environment:
+            PMA_HOST: grocery-db
+            PMA_USER: root
+            PMA_PASSWORD: admin@123
+        ports:
+            - "8090:80"
+        networks:
+            - grocery
+
+    myredis:
+        image: redis
+        container_name: myredis
+        ports:
+            - 6379:6379
+        restart: always
+        networks:
+            - grocery
+        volumes:
+            - dbdata:/var/lib/redis
+
+networks:
+    grocery:
+        driver: bridge
+
+volumes:
+    dbdata:
+        driver: local
+
+    # myelastic:
+    #     image: elasticsearch:7.8.1
+    #     container_name: myelastic
+    #     ports:
+    #         - 9200:9200
+    #         - 9300:9300
+    #     environment:
+    #         - discovery.type=single-node
+    #     networks:
+    #         - grocery
+
+    # mykibana:
+    #     image: kibana:7.8.1
+    #     container_name: mykibana
+    #     ports:
+    #         - 5601:5601
+    #     links:
+    #         - myelastic:elasticsearch
+    #     networks:
+    #         - grocery
+
+    # myrabbit:
+    #     image: rabbitmq:3-management
+    #     container_name: myrabbit
+    #     ports:
+    #         - 15672:15672
+    #         - 5672:5672
+    #     volumes:
+    #         - dbdata:/var/lib/rabbitmq
+    #     networks:
+    #         - grocery
+
+    # jenkins:
+    #     container_name: grocery-jenin
+    #     image: jenkins/jenkins:latest
+    #     restart: unless-stopped
+    #     ports:
+    #         - "8081:8080"
+    #     volumes:
+    #         - dbdata:/var/jenkins_home
+    #         - ~/app/jenins:/home/$user/jenkins_home
+
+    #     networks:
+    #         - grocery
